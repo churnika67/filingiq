@@ -308,7 +308,18 @@ def groq_chat(model: str, system_prompt: str, user_prompt: str, temperature: flo
     except requests.exceptions.RequestException as e:
         return f"Could not reach Groq ({e.__class__.__name__}). Check your network connection and try again."
     if resp.status_code == 429:
-        return "Groq free-tier rate limit reached. Wait a minute and try again."
+        # Groq's own error message says exactly which limit was hit (TPM,
+        # RPM, or a daily cap) and the real wait time — surfacing it
+        # directly instead of a hardcoded guess. Found live: a generic
+        # "wait a minute" message was mistaken for a daily cap, when the
+        # real cause was a per-model tokens-per-minute limit being
+        # contended by a second process (the eval notebook) using the
+        # same model at the same time.
+        try:
+            detail = resp.json()["error"]["message"]
+        except Exception:
+            detail = "Rate limit reached, but Groq didn't return details."
+        return f"Groq rate limit hit on model `{model}`: {detail}"
     resp.raise_for_status()
     return resp.json()["choices"][0]["message"]["content"]
 
