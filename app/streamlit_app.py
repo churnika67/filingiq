@@ -36,6 +36,16 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# Local runs read config from .env (above). Streamlit Community Cloud has
+# no .env file — it injects secrets via st.secrets (TOML) instead. Copy
+# any of those into os.environ so the rest of this file (which reads
+# os.getenv/os.environ everywhere) works unmodified on either host.
+try:
+    for _key, _value in st.secrets.items():
+        os.environ.setdefault(_key, str(_value))
+except Exception:
+    pass  # no secrets.toml configured (e.g. local run with only .env) — fine
+
 GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
 TOP_K_DEFAULT = int(os.getenv("FILINGIQ_TOP_K", "6"))
 MAX_CONTEXT_CHARS = 12000  # keeps prompts well inside free-tier token limits
