@@ -1,0 +1,13 @@
+# Streamlit theme config — warm editorial "filing desk" look (newspaper
+# masthead, paper background), paired with the custom CSS block at the
+# top of streamlit_app.py.
+[theme]
+base = "light"
+primaryColor = "#B23A2E"
+backgroundColor = "#F7F1E3"
+secondaryBackgroundColor = "#EFE6D3"
+textColor = "#201C16"
+font = "serif"
+
+[server]
+headless = true

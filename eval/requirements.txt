@@ -1,0 +1,25 @@
+jupyter>=1.0
+snowflake-connector-python[pandas,secure-local-storage]>=3.10
+pandas>=2.0
+matplotlib>=3.8
+requests>=2.31
+python-dotenv>=1.0
+
+# TruLens. Confirmed working combination (tested 2026-11-11):
+# trulens-core/trulens-connectors-snowflake/trulens-providers-litellm all
+# resolved to 2.16.0, litellm to 1.109.0.
+trulens-core>=1.0
+trulens-providers-litellm>=1.0
+trulens-connectors-snowflake>=1.0
+litellm>=1.40
+
+# KNOWN ISSUE: trulens-connectors-snowflake 2.16.0 declares
+# `snowflake-sqlalchemy<2.0`, but that version of snowflake-sqlalchemy
+# doesn't support the SQLAlchemy 2.1.x that also gets installed
+# transitively (`AttributeError: module 'sqlalchemy.orm.context' has no
+# attribute 'ORMSelectCompileState'` on import). Fix: after
+# `pip install -r requirements.txt`, run:
+#   pip install "snowflake-sqlalchemy==2.1.0"
+# pip will print a dependency-conflict warning (ignorable) but the import
+# of trulens.connectors.snowflake works correctly afterward — verified by
+# directly importing SnowflakeConnector/TruSession/LiteLLM.

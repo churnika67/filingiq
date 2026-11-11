@@ -1,0 +1,31 @@
+question,expected_answer,company,fiscal_year,type
+"What was NVIDIA's Data Center segment revenue growth in fiscal year 2026?","Data Center revenue grew 68% year over year, from $115.2 billion in fiscal 2025 to $193.7 billion in fiscal 2026, driven by accelerated computing and AI (Blackwell).",NVDA,2026,factual
+"What charge did NVIDIA record related to H20 excess inventory in fiscal year 2026?","A $4.5 billion charge in the first quarter of fiscal 2026 for H20 excess inventory and purchase obligations, after the U.S. government required a license to export H20 products to China.",NVDA,2026,factual
+"What was Apple's gross margin percentage in fiscal year 2025?","46.9% total gross margin percentage.",AAPL,2025,factual
+"What risk factors does Apple's fiscal 2026 10-K cite related to tariffs?","New U.S. tariffs announced from Q2 2025 on imports from China mainland, India, Japan, South Korea, Taiwan, Vietnam and the EU; reciprocal/retaliatory tariffs by other countries; possible further sector-based tariffs (e.g. Section 232 semiconductors, Section 301); uncertainty about tariff refunds; and impacts on supply chain, rare earths and components, pricing, gross margin and consumer demand.",AAPL,2026,factual
+"What was Apple's net sales from the Wearables, Home and Accessories segment in fiscal year 2026?","$35.577 billion ($35,577 million).",AAPL,2026,factual
+"What was Microsoft's revenue from the Intelligent Cloud segment in fiscal year 2024?","$105.4 billion ($105,362 million), up 20% from $87.9 billion in fiscal 2023, as reported in the fiscal 2024 10-K.",MSFT,2024,factual
+"What were Microsoft's total research and development expenses in fiscal year 2025?","$32.5 billion ($32,488 million), up 10% from $29.5 billion in fiscal 2024.",MSFT,2025,factual
+"Who is the trustee under Microsoft's indentures, as disclosed in its fiscal 2025 10-K?","The Bank of New York Mellon Trust Company, N.A.",MSFT,2025,factual
+"What was Alphabet's total revenue for fiscal year 2024?","$350.0 billion ($350,018 million).",GOOGL,2024,factual
+"What percentage of Alphabet's fiscal 2025 revenue came from Google Search & other advertising?","About 55.7% ($224.5 billion of $402.8 billion total revenues).",GOOGL,2025,factual
+"What were Alphabet's capital expenditures in fiscal year 2025?","$91.4 billion, primarily investments in technical infrastructure.",GOOGL,2025,factual
+"What was Meta's Reality Labs operating loss in fiscal year 2024?","$17.73 billion ($17,729 million).",META,2024,factual
+"What was Meta's total headcount at the end of fiscal year 2025?","78,865 employees as of December 31, 2025, up 6% year over year.",META,2025,factual
+"What was Meta's advertising revenue for fiscal year 2025?","$196.2 billion ($196,175 million), up 22% from $160.6 billion in 2024.",META,2025,factual
+"What was Amazon Web Services' (AWS) operating income for fiscal year 2025?","$45.6 billion ($45,606 million), up from $39.8 billion in 2024.",AMZN,2025,factual
+"What was Amazon's net sales from the North America segment in fiscal year 2025?","$426.3 billion ($426,305 million), up 10% from $387.5 billion in 2024.",AMZN,2025,factual
+"What was Netflix's global streaming revenue for fiscal year 2025?","$45.18 billion ($45,183,036 thousand), up 16% from $39.0 billion in 2024.",NFLX,2025,factual
+"How many paid subscribers did Netflix report at the end of fiscal year 2025?","Not found in the filings. Netflix discontinued reporting membership numbers during 2025, so the 10-K does not state a year-end paid membership count.",NFLX,2025,unanswerable
+"What was Tesla's total automotive revenue for fiscal year 2025?","$69.5 billion ($69,526 million), down 10% from $77.1 billion in 2024.",TSLA,2025,factual
+"What was Tesla's energy generation and storage revenue for fiscal year 2025?","$12.8 billion ($12,771 million), up 27% from $10.1 billion in 2024.",TSLA,2025,factual
+"How did Apple's Wearables, Home and Accessories net sales change from fiscal 2025 to fiscal 2026?","Relatively flat: $35.686 billion in fiscal 2025 vs $35.577 billion in fiscal 2026 (about -0.3%).",AAPL,2025-2026,comparison
+"How did Apple's overall gross margin change from fiscal 2025 to fiscal 2026?","Total gross margin percentage rose from 46.9% in fiscal 2025 to 48.8% in fiscal 2026 (+1.9 percentage points).",AAPL,2025-2026,comparison
+"How did Alphabet's Google Cloud revenue change from fiscal 2024 to fiscal 2025?","Increased about 36%, from $43.2 billion in 2024 to $58.7 billion in 2025.",GOOGL,2024-2025,comparison
+"How did Meta's Reality Labs operating loss change from fiscal 2024 to fiscal 2025?","The loss widened about 8%, from $17.73 billion in 2024 to $19.19 billion in 2025.",META,2024-2025,comparison
+"How did Microsoft's Intelligent Cloud segment revenue change from fiscal 2024 to fiscal 2025?","Increased 21%, from $87.5 billion to $106.3 billion, per the fiscal 2025 10-K (segments were recast; the fiscal 2024 10-K originally reported fiscal 2024 Intelligent Cloud revenue as $105.4 billion).",MSFT,2024-2025,comparison
+"What is the CEO of NVIDIA's personal favorite programming language?","Not found in the filings.",NVDA,2026,unanswerable
+"What will Apple's stock price be exactly one year from the filing date?","Not found in the filings.",AAPL,2026,unanswerable
+"What specific marketing budget does Microsoft plan to allocate for its next unannounced product?","Not found in the filings.",MSFT,2025,unanswerable
+"What is the home address of Amazon's current Chief Financial Officer?","Not found in the filings.",AMZN,2025,unanswerable
+"What percentage of Netflix's next quarter's content budget will go to unscripted reality shows?","Not found in the filings.",NFLX,2025,unanswerable
