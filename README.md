@@ -161,17 +161,38 @@ filingiq/
 
 ## Evaluation results
 
-*(Fill in after running `eval/eval_notebook.ipynb` with your own filled-in
-`questions.csv`. Numbers below are placeholders.)*
+Run live on 2026-11-12 (production config, 1800/300 chunking, 30
+questions against the real 8-company/12-filing corpus). Only one config
+was run — see "Future improvements" for why — so this isn't a 3-way
+comparison, it's a direct quality measurement of what's actually deployed.
 
-| Config (chunk size / overlap) | Groundedness | Context relevance | Answer relevance | Accuracy (LLM-judge) | Refusal rate (unanswerable) |
-|---|---|---|---|---|---|
-| 1000 / 200 | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ |
-| 1800 / 300 | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ |
-| 3000 / 500 | _TBD_ | _TBD_ | _TBD_ | _TBD_ | _TBD_ |
+| Metric | Score | Sample |
+|---|---|---|
+| Groundedness | 0.64 | 11 questions |
+| Context relevance | 0.81 | 12 questions |
+| Answer relevance | 0.75 | 12 questions |
+| Accuracy (LLM-judge vs. human-written expected answers) | 0.33 | 12 questions |
+| Refusal rate (unanswerable questions) | **not measured** | 0 of 6 |
 
-**Recommended configuration:** _TBD_ — see `eval/results/comparison_summary.csv`
-and `eval/results/comparison_chart.png` after running the notebook.
+**Why the sample sizes are 11-12 instead of 30, and refusal rate is
+missing entirely:** Groq's free tier rate-limits aggressively (an
+~8,000 tokens/minute cap that this notebook's call volume — up to 4 Groq
+calls per question — burns through fast), and this project's key hit that
+limit partway through the run. The 6 unanswerable-question rows happened
+to be later in `questions.csv` and all failed before getting a real
+answer, so refusal rate has zero valid data points, not a real `0%` —
+reporting a `0%` here would misleadingly suggest the model never
+refuses, when actually it was simply never asked (successfully). The
+other four metrics *are* real measurements from the questions that did
+complete, just on a partial sample.
+
+**To get the complete picture:** re-run `eval/eval_notebook.ipynb` with a
+fresh Groq key (or after your existing key's quota resets) — the per-row
+pacing and retry logic are already tuned to survive a full 30-question
+run as long as the underlying quota holds out. The three chunk-size
+configs (1000/200, 3000/500) can also be re-enabled in the notebook's
+`CONFIGS` dict for an actual 3-way comparison once quota allows a longer
+run.
 
 ## Screenshots
 
