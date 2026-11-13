@@ -98,6 +98,25 @@ def escape_markdown_dollars(text: str) -> str:
     return text.replace("$", "\\$")
 
 
+# Separate, real issue seen directly from this model family: it sometimes
+# emits narrow/non-breaking Unicode space characters (e.g. U+202F between
+# "Form" and "10-K" in one observed response) instead of a plain ASCII
+# space. These render as a near-invisible sliver rather than a normal
+# gap, which looks identical to a missing space ("68%year-over-year").
+# Normalizing every Unicode space-separator character to a plain space
+# fixes this independently of the $-escaping above -- both are real,
+# separate causes of the same visual symptom.
+_UNICODE_SPACES_RE = re.compile(r"[   -   　]")
+
+
+def normalize_unicode_spaces(text: str) -> str:
+    return _UNICODE_SPACES_RE.sub(" ", text)
+
+
+def sanitize_for_markdown(text: str) -> str:
+    return escape_markdown_dollars(normalize_unicode_spaces(text))
+
+
 st.set_page_config(page_title="FilingIQ", page_icon="🗞️", layout="wide")
 
 # --------------------------------------------------------------------------
@@ -471,7 +490,7 @@ question = st.chat_input("e.g. How did NVIDIA's data center revenue change?")
 with chat_tab:
     for turn in st.session_state.history:
         with st.chat_message(turn["role"]):
-            st.markdown(escape_markdown_dollars(turn["content"]))
+            st.markdown(sanitize_for_markdown(turn["content"]))
             if turn.get("sources") is not None and not turn["sources"].empty:
                 with st.expander("📎 Sources"):
                     st.dataframe(turn["sources"], hide_index=True, width="stretch")
@@ -479,7 +498,7 @@ with chat_tab:
     if question:
         st.session_state.history.append({"role": "user", "content": question, "sources": None})
         with st.chat_message("user"):
-            st.markdown(escape_markdown_dollars(question))
+            st.markdown(sanitize_for_markdown(question))
 
         with st.chat_message("assistant"):
             with st.spinner("Rewriting query..."):
@@ -512,7 +531,7 @@ with chat_tab:
                 sources = sources.reset_index(drop=True)
                 sources.index += 1
 
-            st.markdown(escape_markdown_dollars(answer))
+            st.markdown(sanitize_for_markdown(answer))
             if sources is not None:
                 with st.expander("📎 Sources"):
                     st.dataframe(sources, width="stretch")
