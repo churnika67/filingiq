@@ -86,6 +86,18 @@ _CITATION_MARKER_RE = re.compile(r"【\s*(\d+)[^】]*】")
 def normalize_citations(text: str) -> str:
     return _CITATION_MARKER_RE.sub(lambda m: f"[{m.group(1)}]", text)
 
+
+# Streamlit's markdown renderer treats a PAIR of `$` as LaTeX math
+# delimiters (KaTeX). 10-K answers routinely contain two or more dollar
+# amounts ("$193.7 billion ... $115.2 billion"), so everything between
+# the first and second `$` gets parsed as a math expression instead of
+# plain text -- and inside LaTeX math mode, `%` starts a comment that
+# eats the rest of the line, which is exactly what caused "68%year-over-
+# year" to lose its space. Escaping every `$` to `\$` turns this off.
+def escape_markdown_dollars(text: str) -> str:
+    return text.replace("$", "\\$")
+
+
 st.set_page_config(page_title="FilingIQ", page_icon="🗞️", layout="wide")
 
 # --------------------------------------------------------------------------
@@ -459,7 +471,7 @@ question = st.chat_input("e.g. How did NVIDIA's data center revenue change?")
 with chat_tab:
     for turn in st.session_state.history:
         with st.chat_message(turn["role"]):
-            st.markdown(turn["content"])
+            st.markdown(escape_markdown_dollars(turn["content"]))
             if turn.get("sources") is not None and not turn["sources"].empty:
                 with st.expander("📎 Sources"):
                     st.dataframe(turn["sources"], hide_index=True, width="stretch")
@@ -467,7 +479,7 @@ with chat_tab:
     if question:
         st.session_state.history.append({"role": "user", "content": question, "sources": None})
         with st.chat_message("user"):
-            st.markdown(question)
+            st.markdown(escape_markdown_dollars(question))
 
         with st.chat_message("assistant"):
             with st.spinner("Rewriting query..."):
@@ -500,7 +512,7 @@ with chat_tab:
                 sources = sources.reset_index(drop=True)
                 sources.index += 1
 
-            st.markdown(answer)
+            st.markdown(escape_markdown_dollars(answer))
             if sources is not None:
                 with st.expander("📎 Sources"):
                     st.dataframe(sources, width="stretch")
